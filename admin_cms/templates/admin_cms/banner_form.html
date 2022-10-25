@@ -1,0 +1,206 @@
+{% extends 'admin_cms/base.html' %}
+{% load static i18n %}
+
+{% block content %}
+
+    <h3 class="text-center">{% trans 'На головній верх' %}</h3>
+    <div class="container-fluid form-group" style="border: solid black 1px; border-radius: 5px;">
+        <form action="{% url 'create_banner' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row float-right" style="margin: 1% 1% 0 0">
+                    <label class="switch">
+                        {{ main_top_banner_form.turned_on }}
+                        <span class="slider round"></span>
+                    </label>
+            </div>
+            <div class="d-flex row">
+
+                {{ main_top_photo_formset.management_form }}
+                <div id="main-banner-list" class="flex-column"
+                     style="{% if main_top_photo_formset.errors %}
+                        border: 1px solid red; border-radius: 0.25em; padding: 3px;
+                            {% endif %}
+                             margin-top: 18px;">
+                    {% for form in main_top_photo_formset %}
+                        {{ form.id }}
+                        <div id="{{ form.photo.auto_id }}" class="flex-column" style=" position:relative; display: inline-block;">
+                            <div style="margin-left: 33%;">
+                                <img id="{{ form.photo.auto_id }}-preview"
+                                     src="{% if form.instance.photo %}{{ form.instance.photo.url }}{% else %}{% static 'admin_cms/logos/empty-photo.png' %}{% endif %}"
+                                    class="img-thumbnail" alt="your image" style="width: 150px; height: 105px;"/>
+                                <img class="cancel-button-checkbox" style="top:-5%; right: -5%;" onclick="hidePhoto(event, this)"
+                                     src="{% static 'admin_cms/logos/cancel-button.png' %}">
+                            </div>
+                            <span class="btn btn-primary btn-file" style="margin: 10% 0% 0% 38%">{% trans 'Вибрати фото' %}
+                                {{ form.photo }}
+                            </span>
+                            <div class="row" style="margin: 3% 0% 2% 0%">
+                                <div class="col-md-2">{{ form.url.label }}</div>
+                                <div class="col-md-10">{{ form.url }}</div>
+                            </div>
+                            <div class="row" style="margin: 3% 0% 2% 0%">
+                                <div class="col-md-2">{{ form.text.label }}</div>
+                                <div class="col-md-10">{{ form.text }}</div>
+                            </div>
+                            <div clas="row" style="display: none;">
+                                {{ form.DELETE }}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div id="empty-form" style="position: relative; display: none; margin-bottom: 20px; margin-top: 5px;">
+                    <div style="margin-left: 33%;">
+                        <img id="image-preview" src="{% static 'admin_cms/logos/empty-photo.png' %}"
+                        class="img-thumbnail" alt="your image" style="width: 150px; height: 105px;"/>
+                        <img class="cancel-button" style="top:-5%; right: -5%;" src="{% static 'admin_cms/logos/cancel-button.png' %}">
+                    </div>
+                    <span class="btn btn-primary btn-file" style="margin: 10% 0% 0% 38%">{% trans 'Вибрати фото' %}
+                        {{ main_top_photo_formset.empty_form.photo }}
+                    </span>
+                    <div class="row" style="margin: 3% 0% 2% 0%">
+                        <div class="col-md-2">{{ main_top_photo_formset.empty_form.url.label }}</div>
+                        <div class="col-md-10">{{ main_top_photo_formset.empty_form.url }}</div>
+                    </div>
+                    <div class="row" style="margin: 3% 0% 2% 0%">
+                        <div class="col-md-2">{{ main_top_photo_formset.empty_form.text.label }}</div>
+                        <div class="col-md-10">{{ main_top_photo_formset.empty_form.text }}</div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary row" style="margin: 3px 0 3px 5px;" id="add-more-main_banner" type="button" >{% trans 'Додати фото' %}</button>
+            <div class="row" style="padding: 10px 0 10px 8px;">
+                <div class="col-md-2">{{ main_top_banner_form.turning_speed.label }}</div>
+                <div class="col-md-3">{{ main_top_banner_form.turning_speed }}</div>
+            </div>
+            <div class="row" style="padding: 10px 5px 10px 0">
+                <div class="col-md-11"></div>
+                <div class="col-md-1">
+                    <button type="submit" name="main_top_banner" class="btn btn-primary btn-block">{% trans 'Зберегти' %}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <h3 class="text-center" style="margin-top: 5%;">{% trans 'Наскрізний банер на задньому фоні' %}</h3>
+    <div class="flex-column container-fluid form-group" style="border: solid black 1px; border-radius: 5px; margin-bottom: 20px;">
+        <form action="{% url 'create_banner' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="flex-column">
+                <div class="flex-column" style="display: inline-block; margin: 20px 0 0 20px">
+                    <div class="flex-column" style=" display: inline-block;
+                            {% if background_banner_form.background.errors %}border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                            {% endif %}>
+                        <div class="form-check">
+                            {{ background_banner_form.background.0 }}
+                        </div>
+                    <br>
+                        <div class="form-check" style="padding-left: 0">
+                            {{ background_banner_form.background.1 }}
+                        </div>
+                    </div>
+                    <div class="flex-column form-group row"
+                         style="display: inline-block; margin: 0 0 0 50px
+                                {% if background_banner_form.photo.errors %}border: 1px solid red; border-radius: 0.25em; padding: 3px;
+                                {% endif %}">
+                        <div class="col-sm-12 d-flex" style="display: inline-block">
+                            <img id="{{ background_banner_form.photo.auto_id }}-preview"
+                                 src="{% if background_banner_form.instance.photo %}{{ background_banner_form.instance.photo.url }}
+                                      {% else %}
+                                        {% static 'admin_cms/logos/empty-photo.png' %}
+                                        {% endif %}"
+                                class="img-thumbnail" alt="your image" style="width: 150px; height: 105px;"/>
+                            <span class="btn btn-primary btn-file" style="margin: 25px 0 0 25px; height: 40px;">{% trans 'Додати' %}
+                                {{ background_banner_form.photo }}
+                            </span>
+                            <button id="{{ background_banner_form.photo.id_for_label }}-delete" type="button"
+                                    class="btn btn-danger" onclick="removeFile(this)"
+                                    style="height: 40px; margin: 25px 0 0 25px;">{% trans 'Видалити' %}</button>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="d-flex row" style="padding: 10px 5px 10px 0">
+                <div class="col-md-11"></div>
+                <div class="col-md-1">
+                    <button type="submit" name="background_banner" class="btn btn-primary btn-block">{% trans 'Зберегти' %}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <h3 class="text-center" style="margin-top: 5%;">{% trans 'На головній Новини Акції' %}</h3>
+    <div class="container-fluid form-group" style="border: solid black 1px; border-radius: 5px;">
+        <form action="{% url 'create_banner' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row float-right" style="margin: 1% 1% 0 0">
+                    <label class="switch">
+                        {{ news_banner_form.turned_on }}
+                        <span class="slider round"></span>
+                    </label>
+            </div>
+            <div class="d-flex row">
+
+                {{ news_banner_formset.management_form }}
+                <div id="news-banner-list" class="flex-column"
+                     style="{% if news_banner_formset.errors %}
+                        border: 1px solid red; border-radius: 0.25em; padding: 3px;
+                            {% endif %}
+                             margin-top: 18px;">
+                    {% for form in news_banner_formset %}
+                        {{ form.id }}
+                        <div id="{{ form.photo.auto_id }}" class="flex-column" style="position:relative; display: inline-block;">
+                            <div style="margin-left: 33%;">
+                                <img id="image-preview"
+                                     src="{% if form.instance.photo %}{{ form.instance.photo.url }}{% else %}{% static 'admin_cms/logos/empty-photo.png' %}{% endif %}"
+                                class="img-thumbnail" alt="your image" style="width: 150px; height: 105px;"/>
+                                <img class="cancel-button-checkbox" onclick="hidePhoto(event, this)" style="top:-5%; right: -5%;" src="{% static 'admin_cms/logos/cancel-button.png' %}">
+                            </div>
+                            <span class="btn btn-primary btn-file" style="margin: 10% 0% 0% 38%">{% trans 'Вибрати фото' %}
+                                {{ form.photo }}
+                            </span>
+                            <div class="row" style="margin: 3% 0% 2% 0%">
+                                <div class="col-md-2">{{ form.url.label }}</div>
+                                <div class="col-md-10">{{ form.url }}</div>
+                            </div>
+                            <div class="row" style="display: none;">
+                                {{ form.DELETE }}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div id="empty-news-form" style="position: relative; display: none; margin-bottom: 20px; margin-top: 5px;">
+                    <div style="margin-left: 33%;">
+                        <img id="image-preview" src="{% static 'admin_cms/logos/empty-photo.png' %}"
+                        class="img-thumbnail" alt="your image" style="width: 150px; height: 105px;"/>
+                        <img class="cancel-button" style="top:-5%; right: -5%;" src="{% static 'admin_cms/logos/cancel-button.png' %}">
+                    </div>
+                    <span class="btn btn-primary btn-file" style="margin: 10% 0% 0% 38%">{% trans 'Вибрати фото' %}
+                        {{ news_banner_formset.empty_form.photo }}
+                    </span>
+                    <div class="row" style="margin: 3% 0% 2% 0%">
+                        <div class="col-md-2">{{ news_banner_formset.empty_form.url.label }}</div>
+                        <div class="col-md-10">{{ news_banner_formset.empty_form.url }}</div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary row" style="margin: 3px 0 3px 5px;" id="add-more-news_banner" type="button" >{% trans 'Додати фото' %}</button>
+            <div class="row" style="padding: 10px 0 10px 8px;">
+                <div class="col-md-2">{{ news_banner_form.turning_speed.label }}</div>
+                <div class="col-md-3">{{ news_banner_form.turning_speed }}</div>
+            </div>
+            <div class="row" style="padding: 10px 5px 10px 0">
+                <div class="col-md-11"></div>
+                <div class="col-md-1">
+                    <button type="submit" name="news_banner" class="btn btn-primary btn-block">{% trans 'Зберегти' %}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock content %}
