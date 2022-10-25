@@ -1,0 +1,91 @@
+{% extends 'admin_cms/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6" style="width: 150px; height: 150px;">
+            <canvas id="chart1"></canvas>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <canvas id="chart2"></canvas>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 35%;">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <canvas id="chart3"></canvas>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <canvas id="chart4"></canvas>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const chart1 = document.getElementById('chart1').getContext('2d');
+        const chart2 = document.getElementById('chart2').getContext('2d');
+        const chart3 = document.getElementById('chart3').getContext('2d');
+        const chart4 = document.getElementById('chart4').getContext('2d');
+
+        const chart1_realisation = new Chart(chart1, {
+            type: 'doughnut',
+            data: {
+                labels: ['Чоловіки', 'Жінки'],
+                datasets: [{
+                    label: 'Some',
+                    data: [parseInt({{ males }}), parseInt({{ females }})],
+                    backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 99, 132)'],
+                }]
+
+            }
+        })
+
+        const chart2_realisation = new Chart(chart2, {
+            type: 'line',
+            data: {
+                labels: {{ session_dates|safe }},
+                datasets: [{
+                    label: 'Кількість сеансів по датах',
+                    data: {{ session_amount|safe }},
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            }
+
+        })
+
+        const chart3_realisation = new Chart(chart3, {
+            type: 'pie',
+            data: {
+                labels: {{ movie_names|safe }},
+                datasets: [{
+                    label: 'Сеанси фільмів',
+                    data: {{ session_amount|safe }},
+                    backgroundColor: ["red", "green","blue","orange","brown"]
+                }]
+            }
+        })
+
+        const chart4_realisation = new Chart(chart4, {
+            type: 'bar',
+            data: {
+                labels: {{ city_names|safe }},
+                datasets: [{
+                    label: 'Міста',
+                    data: {{ city_amount|safe }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(255, 205, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(201, 203, 207, 0.7)'
+                    ],
+                }]
+            }
+        })
+    </script>
+{% endblock %}

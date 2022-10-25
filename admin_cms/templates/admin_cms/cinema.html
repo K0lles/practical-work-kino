@@ -1,0 +1,54 @@
+{% extends 'admin_cms/base.html' %}
+{% load static i18n %}
+
+{% block content-header %}
+    <div>
+        <h4 class="text-center">Список кінотеатрів</h4>
+    </div>
+    <a class="btn btn-success float-right" style="margin-right: 3%;" href="{% url 'cinema_create' %}">Створити кінотеатр</a>
+{% endblock content-header %}
+
+{% block content %}
+
+    {% if cinema_list|length == 0 %}
+        <div class="content" style="padding-top: 15%;">
+            <h1>{% trans 'Поки що не існує жодного кінотеатру, але ви можете виправити це' %}</h1>
+        </div>
+    {% else %}
+
+        <div class="content flex-column" style="padding-top: 75px;">
+            {% for cinema in cinema_list %}
+                <div style="position: relative; margin-left: 8%; display: inline-block;">
+                    <a href="{% url 'update_cinema' pk=cinema.id %}">
+                        <img class="img-fluid" src="{{ cinema.logo.url }}" alt="cinema_logo" style="width: 295px; height: 255px;">
+                    </a>
+                    <a href="#" style="color: black; text-decoration: none;" data-toggle="modal" data-target="#deleteCinemaModal{{ cinema.id }}">
+                        <img class="cancel-button-without-fade" src="{% static 'admin_cms/logos/cancel-button.png' %}" style="top: -8%; right: -8%;">
+                    </a>
+                    <h5 class="text-center" style="margin-top: 2%;">{{ cinema.name }}</h5>
+                </div>
+                <div class="modal fade" id="deleteCinemaModal{{ cinema.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{% trans 'Видалити кінотеатр' %}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        {% trans 'Ви впевнені, що хочете видалити кінотеатр ' %} {{ cinema.name }}?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Скасувати' %}</button>
+                        <a class="btn btn btn-danger" href="{% url 'delete_cinema' pk=cinema.id %}">{% trans 'Видалити' %}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+
+{% endblock %}
