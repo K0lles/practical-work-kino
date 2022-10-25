@@ -1,6 +1,9 @@
 from django.db.models import Count
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
+from admin_cms.forms import main_top_banner_form_factory, main_top_formset_factory, background_banner_form_factory, \
+    news_banner_form_factory, news_banner_formset_factory
+from banner.models import MainTopBanner, BackgroundBanner, NewsBanner, MainTopBannerPhoto, NewsBannerPhoto
 from cinema.models import Cinema
 from user.models import SimpleUser
 from movie.models import *
@@ -142,7 +145,6 @@ def create_banner(request):
             context['news_banner_formset'] = news_banner_formset_class
 
     return render(request, 'admin_cms/banner_form.html', context=context)
-
 
 
 def cinema_view(request):
