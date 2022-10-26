@@ -1,0 +1,246 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#id_birthday" ).datepicker({ dateFormat: 'dd-mm-yy', defaultDate: new Date(2000, 10, 30) }).val();
+        } );
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{% static 'admin_cms/css/styles.css' %}">
+    <style>
+        p {
+            color: red;
+        }
+        li {
+            color: red;
+        }
+    </style>
+</head>
+<body class="hold-transition register-page">
+    <div class="register-box">
+      <div class="register-logo">
+        <b>KinoCMS</b>
+      </div>
+
+      <div class="card">
+        <div class="card-body register-card-body">
+          <p class="login-box-msg" style="color: black;">Registration</p>
+          <form action="{% url 'registration' %}" method="post">
+              {% csrf_token %}
+
+            <div class="input-group mb-3"
+                    {% if registration_form.surname.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+                {{ registration_form.surname }}
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+                {% if registration_form.surname.errors %}
+                        {% for error in registration_form.surname.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="input-group mb-3"
+                    {% if registration_form.name.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+                {{ registration_form.name }}
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+                {% if registration_form.name.errors %}
+                        {% for error in registration_form.name.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="input-group mb-3"
+                    {% if registration_form.alias.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+                {{ registration_form.alias }}
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+                {% if registration_form.alias.errors %}
+                        {% for error in registration_form.alias.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="input-group mb-3"
+                    {% if registration_form.card_number.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+                {{ registration_form.card_number }}
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+                {% if registration_form.card_number.errors %}
+                        {% for error in registration_form.card_number.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="input-group mb-3" >
+                <div class="form-check form-check-inline">
+                    {{ registration_form.language.0 }}
+                </div>
+                <div class="form-check form-check-inline">
+                    {{ registration_form.language.1 }}
+                </div>
+            </div>
+
+            <div class="input-group mb-3"
+                    {% if registration_form.phone_number.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+                {{ registration_form.phone_number }}
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+                {% if registration_form.phone_number.errors %}
+                        {% for error in registration_form.phone_number.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="input-group mb-3"
+                    {% if registration_form.birthday.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+                {{ registration_form.birthday }}
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-user"></span>
+                    </div>
+                </div>
+                {% if registration_form.birthday.errors %}
+                    {% for error in registration_form.birthday.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="form-check form-check-inline">
+                    {{ registration_form.sex.0 }}
+                </div>
+                <div class="form-check form-check-inline">
+                    {{ registration_form.sex.1 }}
+                </div>
+            </div>
+
+            <div class="input-group mb-3"
+                    {% if registration_form.city.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+                {{ registration_form.city }}
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+                {% if registration_form.city.errors %}
+                    {% for error in registration_form.city.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                 {% endif %}
+            </div>
+
+            <div class="input-group mb-3"
+                    {% if registration_form.email.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+              {{ registration_form.email }}
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+                {% if registration_form.email.errors %}
+                    {% for error in registration_form.email.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                 {% endif %}
+
+            <div class="input-group mb-3"
+                    {% if registration_form.password.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+              {{ registration_form.password }}
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+                <br>
+                {% if registration_form.password.errors %}
+                    {% for error in registration_form.password.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                 {% endif %}
+            </div>
+
+            <div class="input-group mb-3"
+                    {% if registration_form.password1.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+                {{ registration_form.password1 }}
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+                {% if registration_form.password1.errors %}
+                    {% for error in registration_form.password1.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                 {% endif %}
+            </div>
+
+            {{ registration_form.non_field_errors }}
+
+            <div class="row">
+              <div class="col-4">
+              </div>
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+              </div>
+            </div>
+          </form>
+            <p style="margin-top: 5%; margin-bottom: 0; color: gray">Already have account? - <a href="{% url 'login' %}">Sign in</a></p>
+        </div>
+        <!-- /.form-box -->
+      </div><!-- /.card -->
+    </div>
+    <!-- /.register-box -->
+</body>
+</html>
