@@ -1,10 +1,10 @@
 from django.db.models import Count
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect
 
-from admin_cms.forms import main_top_banner_form_factory, main_top_formset_factory, background_banner_form_factory, \
-    news_banner_form_factory, news_banner_formset_factory
+from admin_cms.forms import *
 from banner.models import MainTopBanner, BackgroundBanner, NewsBanner, MainTopBannerPhoto, NewsBannerPhoto
-from cinema.models import Cinema
+from cinema.models import Cinema, Photo
 from user.models import SimpleUser
 from movie.models import *
 
