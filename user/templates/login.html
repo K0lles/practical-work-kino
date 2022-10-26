@@ -1,0 +1,73 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login in</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{% static 'admin_cms/css/styles.css' %}">
+</head>
+<body class="hold-transition register-page">
+    <div class="register-box">
+          <div class="register-logo">
+            <b>KinoCMS</b>
+          </div>
+
+          <div class="card">
+            <div class="card-body register-card-body">
+              <p class="login-box-msg">Login</p>
+
+              <form action="{% url 'login' %}" method="post">
+                  {% csrf_token %}
+                    <div class="input-group mb-3"
+                            {% if login_form.email.errors %}
+                         style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                            {% endif %}>
+
+                      <input id="{{ login_form.email.auto_id }}" name="{{ login_form.email.html_name }}"
+                             class="form-control" placeholder="E-mail">
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-envelope"></span>
+                        </div>
+                             {% for error in login_form.email.errors %}
+                                 <p>{{ error }}</p>
+                             {% endfor %}
+                      </div>
+
+                    </div>
+
+                    <div class="input-group mb-3"
+                            {% if login_form.password.errors %}
+                         style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                            {% endif %}>
+                        <input class="form-control" type="password" id="{{ login_form.password.auto_id }}"
+                               name="{{ login_form.password.html_name }}" placeholder="Введіть пароль" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                             <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                           {% for error in login_form.password.errors %}
+                               <p style="margin-top: 4px; color: red;">{{ error }}</p>
+                           {% endfor %}
+                    </div>
+                  <div class="row">
+                 <div class="col-4">
+                 </div>
+                  <!-- /.col -->
+                      <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                      </div>
+                      <!-- /.col -->
+                 </div>
+              </form>
+                <p style="margin-top: 4%; margin-bottom: 0;">Do not have account? - <a href="{% url 'registration' %}" >Sign up</a></p>
+                <p style="margin-top: 4%; margin-bottom: 0;">Forgot the password? - <a href='{% url 'change_password' %}'>Reset password</a></p>
+            </div>
+          </div>
+    </div>
+</body>
+</html>
