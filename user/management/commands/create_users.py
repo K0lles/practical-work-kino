@@ -1,4 +1,3 @@
-
 from django.core.management.base import BaseCommand
 from user.models import SimpleUser
 import datetime

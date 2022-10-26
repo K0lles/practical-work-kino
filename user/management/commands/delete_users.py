@@ -18,3 +18,5 @@ class Command(BaseCommand):
 
         if kwargs['a']:
             SimpleUser.objects.all().delete()
+
+
