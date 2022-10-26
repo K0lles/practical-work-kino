@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "81:80"
+    volumes:
+      - static_volume:/home/app/kinocms/static
+      - media_volume:/home/app/kinocms/media
+    depends_on:
+      - web
+    restart: "on-failure"
+
+  db:
+    hostname: db
+    image: postgres:13.0-alpine
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgres/data/
+    env_file:
+      - ./.env
+
+  web:
+    build: .
+    command: sh -c "python manage.py makemigrations &&
+                    python manage.py migrate &&
+                    python manage.py create_users 5 &&
+                    python manage.py create-banners &&
+                    python manage.py create-cinema-halls-sessions-movies &&
+                    python manage.py create_pages &&
+                    python manage.py create-news-events &&
+                    python manage.py collectstatic --noinput &&
+                    gunicorn --bind 0.0.0.0:8000 kinocms.wsgi"
+    volumes:
+      - static_volume:/home/app/kinocms/static
+      - media_volume:/home/app/kinocms/media
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    restart: "on-failure"
+    image: kinocms-app
+
+  celery:
+    build: .
+    command: celery -A kinocms.celery worker -l INFO
+    volumes:
+      - .:/home/app/kinocms
+    env_file:
+      - ./.env
+    depends_on:
+      - web
+      - redis
+
+  redis:
+    image: "redis:alpine"
+
+volumes:
+  postgres_data:
+  media_volume:
+  static_volume:
