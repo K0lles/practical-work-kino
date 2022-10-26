@@ -1,0 +1,189 @@
+{% extends 'admin_cms/base.html' %}
+{% load static i18n %}
+
+{% block content %}
+
+        <h1 class="text-center">Email</h1>
+        <form action="{% url 'mailing' %}" method="post" enctype="multipart/form-data" style="border-radius: 25px; border: 2px solid black; padding: 25px;">
+            {% csrf_token %}
+            <div class="flex-column">
+                <div class="form-group row">
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <label class="col-form-label">{% trans 'Вибрати, кому вислати:' %}</label>
+                    </div>
+                    <div class="form-check form-check-inline col-sm-2">
+                        {{ user_data_form.all_users.0 }}
+                    </div>
+                    <div class="form-check form-check-inline col-sm-4">
+                        {{ user_data_form.all_users.1 }}
+                        <button disabled id="choose-users-button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#users-window" style="margin-left: 4%">
+                          {% trans 'Вибрати користувачів' %}
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group row" style="padding-top: 15px;">
+                    <div class="col-6 row">
+                        <div class="row col-12" style="margin-bottom: 15px;">
+                            <label class="col-sm-6">{% trans 'Виберіть файл:' %} </label>
+                            <div class="col-sm-6">
+                                <span class="btn btn-success btn-file"> {% trans 'Завантажити' %}
+                                    <input type="file" name="file" id="id_file" accept=".txt,.html">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row col-12" style="margin-bottom: 15px;">
+                            <label class="col-sm-6">{% trans 'Вибраний файл:' %} </label>
+                            <p id="uploaded-html-file" class="col-sm-6">{% trans 'Файлу не вибрано' %}</p>
+                            <input type="number" id="id_file-for-mailing" name="file-for-mailing" value="" style="display: none;" required>
+                        </div>
+                        <div class="row col-12" style="margin-bottom: 15px;">
+                            <label class="col-sm-6">{% trans 'Кількість вибраних користувачів:' %} </label>
+                            <p id="amount-chosen-users" class="col-sm-6">0</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="files-collection" style="border: solid 1px black; border-radius: 10px; padding-left: 10px;">
+                            <p class="text-center">{% trans 'Файли' %}</p>
+                            {% for file in files %}
+                                <div class="row col-12">
+                                    <input class="file-names form-inline" id="id_file-{{ file.id }}" name="file-names" type="radio" value="{{ file.id }}">
+                                    <label class="col-form-label" for="id_file-{{ file.id }}" style="margin-left: 2%;">{{ file.filename }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- Modal -->
+            <div class="modal fade" id="users-window" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">{% trans 'Вибір користувачів' %}</h5>
+                        </div>
+                        <div class="modal-body" style="margin-left: 4%;">
+                            <div class="row">
+                                <table id="table-users" class="display table col-md-12 col-sm-12">
+                                    <thead>
+                                        <td></td>
+                                        <td>Email</td>
+                                        <td>{% trans 'ПІБ' %}</td>
+                                        <td>{% trans 'Псевдонім' %}</td>
+                                        <td>{% trans 'Дата народження' %}</td>
+                                        <td>{% trans 'Місто' %}</td>
+                                    </thead>
+                                    {% for user in simple_users %}
+                                        <tr style="margin-left: 10px;">
+                                            <td><input id="{{ user_data_form.send_to_current_user.auto_id }}"
+                                                       class="count-checking"
+                                                       name="{{ user_data_form.send_to_current_user.html_name }}"
+                                                       type="checkbox" value="{{ user.email }}"></td>
+                                            <td>{{ user.email }}</td>
+                                            <td>{{ user.surname }} {{ user.name }}</td>
+                                            <td>{{ user.alias }}</td>
+                                            <td>{{ user.birthday|date:'d.m.Y' }}</td>
+                                            <td>{{ user.city }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">{% trans 'Закрити' %}</button>
+                            <button type="button" onclick="countChecked()" data-dismiss="modal" data-bs-dismiss="modal" class="btn btn-primary">{% trans 'Вибрати' %}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col-4"><button type="submit" class="row btn btn-success float-right" style="margin: 0 0 4% 0">{% trans 'Почати розсилку' %}</button></div>
+            </div>
+        </form>
+
+{% endblock %}
+{% block scripts %}
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#table-users').DataTable({
+                pageLength: 5,
+                lengthMenu: [1, 5, 10],
+            });
+        } );
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        $("#id_file").change(function(){
+            let formData = new FormData();
+            formData.append('file', $('#id_file')[0].files[0]);
+            formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            $.ajax({
+                url: "{% url 'files' %}",
+                type: 'post',
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(data){
+
+                    let file_collection = $('#files-collection')
+                    file_collection.empty()
+                    file_collection.append(`<p class="text-center"> {% trans 'Файли' %}</p>`)
+                    for (let i = 0; i < data['files'].length; i++) {
+                        let stringToAppend = `<div class="row col-12">
+                                <input class="file-names form-inline" id="id_file-${data['files'][i][0]}" name="file-names" type="radio" value="${data['files'][i][0]}">
+                                <label class="col-form-label" for="id_file-${data['files'][i][0]}" style="margin-left: 2%;">${data['files'][i][1]}</label>
+                            </div>`
+                        file_collection.append(stringToAppend);
+                    }
+                    let arrayLength = data['files'].length-1;
+
+                    $(`input#id_file-${data['files'][0][0]}`).prop('checked', true);
+                    $('#uploaded-html-file').text(data['files'][0][1]);
+                    $('#id_file-for-mailing').attr('value', (data['files'][0][0]));
+                }
+            });
+        });
+
+        $(document).on('click', '.file-names', function () {
+            let id_input = $(this).attr('id')
+            let labelValue = $(`label[for='${id_input}']`).text();
+            $('#uploaded-html-file').text(labelValue);
+            $('#id_file-for-mailing').attr('value', ($(this).val()));
+        })
+
+        $(document).ready(function() {
+            $('input:radio[name=all_users]').click(function() {
+                var checkval = $('input:radio[name=all_users]:checked').val();
+                $('#choose-users-button').prop('disabled', !(checkval == 'False' || checkval == undefined));
+                if (checkval == 'True') {
+                    $('#amount-chosen-users').text('{{ simple_users|length }}');
+                }
+                if (checkval == 'False') {
+                    $('#amount-chosen-users').text('0');
+                }
+            });
+        });
+
+        function countChecked() {
+            $('#amount-chosen-users').text($(".count-checking:checked").length);
+        }
+    </script>
+{% endblock %}

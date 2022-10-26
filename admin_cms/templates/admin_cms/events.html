@@ -1,0 +1,72 @@
+{% extends 'admin_cms/base.html' %}
+{% load static i18n %}
+
+{% block content-header %}
+    <h3 class="text-center">{% trans 'Список подій' %}</h3>
+    <a class="btn btn-success float-right" style="margin-right: 3%;" href="{% url 'create_event' %}">{% trans 'Створити подію' %}</a>
+{% endblock %}
+
+{% block content %}
+    <div class="list" id="table-list">
+        <table class="table table-bordered" border="1" style="margin-top: 4%;">
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>{% trans 'Назва' %}</strong>
+                    </td>
+                    <td>
+                        <strong>{% trans 'Дата створення' %}</strong>
+                    </td>
+                    <td>
+                        <strong>{% trans 'Статус' %}</strong>
+                    </td>
+                </tr>
+                {% for event in events %}
+                    <tr>
+                        <td>
+                            {{ event.name }}
+                        </td>
+                        <td>
+                            {{ event.created_at|date:"d.m.Y" }}
+                        </td>
+                        <td>
+                            {% if event.status == True %}
+                                {% trans 'ВВІМК' %}
+                                {% else %}
+                                {% trans 'ВИМК' %}
+                            {% endif %}
+                        </td>
+                        <td style="border: none">
+                            <a href="{% url 'update_event' pk=event.id %}" style="text-decoration: none;">
+                                <img src="{% static 'admin_cms/logos/pencil.png' %}" style="width: 25px; height: 25px;">
+                            </a>
+                            <a href="#" data-toggle="modal" data-target="#deleteEventModal{{ event.id }}">
+                                <img src="{% static 'admin_cms/logos/cancel-button.png' %}"
+                                     style="width: 25px; height: 25px;">
+                            </a>
+                        </td>
+                    </tr>
+                     <div class="modal fade" id="deleteEventModal{{ event.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{% trans 'Видалити подію' %}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            {% trans 'Ви впевнені, що хочете видалити подію ' %} {{ event.name }}?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Скасувати' %}</button>
+                            <a class="btn btn btn-danger" href="{% url 'delete_event' pk=event.id %}">{% trans 'Видалити' %}</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

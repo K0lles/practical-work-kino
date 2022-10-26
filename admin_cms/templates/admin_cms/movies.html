@@ -1,0 +1,32 @@
+{% extends 'admin_cms/base.html' %}
+{% load static i18n %}
+
+{% block content-header %}
+    <div>
+        <h4 class="text-center">{% trans 'Список фільмів' %}</h4>
+    </div>
+    <a class="btn btn-success float-right" style="margin-right: 3%;" href="{% url 'create_movie' %}">{% trans 'Створити фільм' %}</a>
+{% endblock content-header %}
+
+{% block content %}
+
+    {% if movies|length == 0 %}
+        <div class="content" style="padding-top: 15%;">
+            <h1>{% trans 'Поки що не існує жодного фільму, але ви можете виправити це' %}</h1>
+        </div>
+    {% else %}
+
+    <div class="content flex-column" style="margin-top: 5%;">
+        {% for movie in movies %}
+            <div style="position: relative; margin-right: 4%; display: inline-block">
+                <a href="{% url 'update_movie' pk=movie.id %}">
+                    <img src="{{ movie.main_photo.url }}" style="width: 295px; height: 255px;">
+                </a>
+                <h5 class="text-center">{{ movie.name }}</h5>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
+{% endblock %}
