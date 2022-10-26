@@ -85,7 +85,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'kinocms.wsgi.application'
+WSGI_APPLICATION = 'practical-work-kino.wsgi.application'
 
 
 # Database

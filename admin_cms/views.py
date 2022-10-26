@@ -1,12 +1,16 @@
 from django.db.models import Count
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import render, redirect
+import importlib
 
 from admin_cms.forms import *
+from admin_cms.models import MailFile
 from banner.models import MainTopBanner, BackgroundBanner, NewsBanner, MainTopBannerPhoto, NewsBannerPhoto
 from cinema.models import Cinema, Photo
 from user.models import SimpleUser
 from movie.models import *
+from .tasks import *
+settings = importlib.import_module('practical-work-kino.settings')
 
 
 def statistics_view(request):

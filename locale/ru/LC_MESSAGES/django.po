@@ -1,0 +1,640 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-30 01:45+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: admin_cms/templates/admin_cms/banner_form.html:6
+msgid "На головній верх"
+msgstr "На главной верх"
+
+#: admin_cms/templates/admin_cms/banner_form.html:34
+#: admin_cms/templates/admin_cms/banner_form.html:59
+#: admin_cms/templates/admin_cms/banner_form.html:161
+#: admin_cms/templates/admin_cms/banner_form.html:182
+#: admin_cms/templates/admin_cms/cinema_change_form.html:114
+#: admin_cms/templates/admin_cms/cinema_change_form.html:129
+#: admin_cms/templates/admin_cms/cinema_form.html:114
+#: admin_cms/templates/admin_cms/event_change_form.html:87
+#: admin_cms/templates/admin_cms/event_change_form.html:102
+#: admin_cms/templates/admin_cms/event_form.html:85
+#: admin_cms/templates/admin_cms/hall_change_form.html:73
+#: admin_cms/templates/admin_cms/hall_change_form.html:88
+#: admin_cms/templates/admin_cms/hall_form.html:69
+#: admin_cms/templates/admin_cms/movie_change_form.html:78
+#: admin_cms/templates/admin_cms/movie_change_form.html:93
+#: admin_cms/templates/admin_cms/movie_form.html:76
+#: admin_cms/templates/admin_cms/news_form.html:85
+#: admin_cms/templates/admin_cms/page_change_form.html:86
+#: admin_cms/templates/admin_cms/page_change_form.html:101
+#: admin_cms/templates/admin_cms/page_form.html:85
+msgid "Вибрати фото"
+msgstr "Выбрать фото"
+
+#: admin_cms/templates/admin_cms/banner_form.html:72
+#: admin_cms/templates/admin_cms/banner_form.html:191
+msgid "Додати фото"
+msgstr "Добавить фото"
+
+#: admin_cms/templates/admin_cms/banner_form.html:80
+#: admin_cms/templates/admin_cms/banner_form.html:128
+#: admin_cms/templates/admin_cms/banner_form.html:199
+#: admin_cms/templates/admin_cms/cinema_change_form.html:238
+#: admin_cms/templates/admin_cms/event_change_form.html:187
+#: admin_cms/templates/admin_cms/hall_change_form.html:136
+#: admin_cms/templates/admin_cms/movie_change_form.html:196
+#: admin_cms/templates/admin_cms/page_change_form.html:170
+#: admin_cms/templates/admin_cms/user_change_form.html:206
+msgid "Зберегти"
+msgstr "Сохранить"
+
+#: admin_cms/templates/admin_cms/banner_form.html:86
+msgid "Наскрізний банер на задньому фоні"
+msgstr "Сквозной баннер на заднем фоне"
+
+#: admin_cms/templates/admin_cms/banner_form.html:115
+#: admin_cms/templates/admin_cms/cinema_change_form.html:63
+#: admin_cms/templates/admin_cms/cinema_change_form.html:85
+#: admin_cms/templates/admin_cms/cinema_form.html:64
+#: admin_cms/templates/admin_cms/contact_form.html:80
+#: admin_cms/templates/admin_cms/event_change_form.html:58
+#: admin_cms/templates/admin_cms/event_form.html:59
+#: admin_cms/templates/admin_cms/hall_change_form.html:34
+#: admin_cms/templates/admin_cms/hall_change_form.html:50
+#: admin_cms/templates/admin_cms/hall_form.html:33
+#: admin_cms/templates/admin_cms/hall_form.html:49
+#: admin_cms/templates/admin_cms/movie_form.html:49
+#: admin_cms/templates/admin_cms/news_form.html:59
+#: admin_cms/templates/admin_cms/page_change_form.html:59
+#: admin_cms/templates/admin_cms/page_form.html:58
+msgid "Додати"
+msgstr "Добавить"
+
+#: admin_cms/templates/admin_cms/banner_form.html:120
+#: admin_cms/templates/admin_cms/cinema.html:44
+#: admin_cms/templates/admin_cms/cinema_change_form.html:68
+#: admin_cms/templates/admin_cms/cinema_change_form.html:90
+#: admin_cms/templates/admin_cms/cinema_form.html:69
+#: admin_cms/templates/admin_cms/cinema_form.html:93
+#: admin_cms/templates/admin_cms/event_change_form.html:63
+#: admin_cms/templates/admin_cms/event_form.html:64
+#: admin_cms/templates/admin_cms/events.html:63
+#: admin_cms/templates/admin_cms/hall_change_form.html:39
+#: admin_cms/templates/admin_cms/hall_change_form.html:55
+#: admin_cms/templates/admin_cms/hall_form.html:38
+#: admin_cms/templates/admin_cms/hall_form.html:54
+#: admin_cms/templates/admin_cms/movie_form.html:54
+#: admin_cms/templates/admin_cms/news.html:63
+#: admin_cms/templates/admin_cms/news_form.html:64
+#: admin_cms/templates/admin_cms/page_change_form.html:64
+#: admin_cms/templates/admin_cms/page_form.html:63
+#: admin_cms/templates/admin_cms/users.html:59
+msgid "Видалити"
+msgstr "Удалить"
+
+#: admin_cms/templates/admin_cms/banner_form.html:134
+msgid "На головній Новини Акції"
+msgstr "На главной Новости Акции"
+
+#: admin_cms/templates/admin_cms/base.html:51
+msgid "Мій кабінет"
+msgstr "Мой кабинет"
+
+#: admin_cms/templates/admin_cms/base.html:77
+#: cinema/templates/cinema/home.html:67
+msgid "Ви впевнені, що хочете вийти?"
+msgstr "Вы уверены, что хотите выйти?"
+
+#: admin_cms/templates/admin_cms/base.html:80
+#: admin_cms/templates/admin_cms/cinema.html:43
+#: admin_cms/templates/admin_cms/events.html:62
+#: admin_cms/templates/admin_cms/news.html:62
+#: admin_cms/templates/admin_cms/users.html:58
+#: cinema/templates/cinema/home.html:70
+#, fuzzy
+#| msgid "Бронювати"
+msgid "Скасувати"
+msgstr "Бронировать"
+
+#: admin_cms/templates/admin_cms/base.html:81
+#: cinema/templates/cinema/home.html:56 cinema/templates/cinema/home.html:71
+msgid "Вийти"
+msgstr "Выйти"
+
+#: admin_cms/templates/admin_cms/base.html:106
+msgid "Статистика"
+msgstr "Статистика"
+
+#: admin_cms/templates/admin_cms/base.html:115
+msgid "Банера | Слайдери"
+msgstr "Баннера | Слайдеры"
+
+#: admin_cms/templates/admin_cms/base.html:124
+msgid "Фільми"
+msgstr "Фильмы"
+
+#: admin_cms/templates/admin_cms/base.html:133
+#: cinema/templates/cinema/home.html:106 cinema/templates/cinema/home.html:212
+msgid "Кінотеатри"
+msgstr "Кинотеатры"
+
+#: admin_cms/templates/admin_cms/base.html:142
+#: cinema/templates/cinema/home.html:116 cinema/templates/cinema/home.html:217
+#: event/templates/event/news_view.html:6
+msgid "Новини"
+msgstr "Новости"
+
+#: admin_cms/templates/admin_cms/base.html:151
+#: cinema/templates/cinema/home.html:109 cinema/templates/cinema/home.html:213
+msgid "Акції"
+msgstr "Акции"
+
+#: admin_cms/templates/admin_cms/base.html:160
+msgid "Сторінки"
+msgstr "Страницы"
+
+#: admin_cms/templates/admin_cms/base.html:169
+#: admin_cms/templates/admin_cms/users.html:5
+msgid "Користувачі"
+msgstr "Пользователи"
+
+#: admin_cms/templates/admin_cms/base.html:178
+msgid "Розсилки"
+msgstr "Рассылки"
+
+#: admin_cms/templates/admin_cms/cinema.html:15
+msgid "Поки що не існує жодного кінотеатру, але ви можете виправити це"
+msgstr "Пока не существует ни одного кинотеатра, но вы можете исправить это"
+
+#: admin_cms/templates/admin_cms/cinema.html:34
+#, fuzzy
+#| msgid "Про кінотеатр"
+msgid "Видалити кінотеатр"
+msgstr "О кинотеатре"
+
+#: admin_cms/templates/admin_cms/cinema.html:40
+msgid "Ви впевнені, що хочете видалити кінотеатр "
+msgstr "Вы уверены, что хотите удалить кинотеатр "
+
+#: admin_cms/templates/admin_cms/cinema_change_form.html:80
+#: admin_cms/templates/admin_cms/cinema_form.html:81
+#: admin_cms/templates/admin_cms/page_change_form.html:54
+msgid "Фото верхнього банера"
+msgstr "Фото верхнего баннера"
+
+#: admin_cms/templates/admin_cms/cinema_change_form.html:102
+#: admin_cms/templates/admin_cms/cinema_form.html:105
+#: admin_cms/templates/admin_cms/event_change_form.html:75
+#: admin_cms/templates/admin_cms/event_form.html:76
+#: admin_cms/templates/admin_cms/hall_change_form.html:61
+#: admin_cms/templates/admin_cms/hall_form.html:60
+#: admin_cms/templates/admin_cms/movie_change_form.html:66
+#: admin_cms/templates/admin_cms/movie_form.html:67
+#: admin_cms/templates/admin_cms/news_form.html:76
+#: admin_cms/templates/admin_cms/page_form.html:76
+msgid "Галерея картинок"
+msgstr "Галерея картинок"
+
+#: admin_cms/templates/admin_cms/cinema_change_form.html:133
+#: admin_cms/templates/admin_cms/cinema_form.html:118
+#: admin_cms/templates/admin_cms/event_change_form.html:106
+#: admin_cms/templates/admin_cms/event_form.html:89
+#: admin_cms/templates/admin_cms/hall_change_form.html:92
+#: admin_cms/templates/admin_cms/hall_form.html:73
+#: admin_cms/templates/admin_cms/movie_change_form.html:97
+#: admin_cms/templates/admin_cms/movie_form.html:80
+#: admin_cms/templates/admin_cms/news_form.html:89
+#: admin_cms/templates/admin_cms/page_change_form.html:105
+#: admin_cms/templates/admin_cms/page_form.html:89
+msgid "Додати картинку"
+msgstr "Добавить картинку"
+
+#: admin_cms/templates/admin_cms/cinema_change_form.html:137
+msgid "Список залів"
+msgstr "Список залов"
+
+#: admin_cms/templates/admin_cms/cinema_change_form.html:142
+msgid "Номер зала"
+msgstr "Номер зала"
+
+#: admin_cms/templates/admin_cms/cinema_change_form.html:145
+#: admin_cms/templates/admin_cms/events.html:18
+#: admin_cms/templates/admin_cms/news.html:18
+#: admin_cms/templates/admin_cms/pages.html:18
+msgid "Дата створення"
+msgstr "Дата создания"
+
+#: admin_cms/templates/admin_cms/cinema_change_form.html:173
+msgid "Створити кінозал"
+msgstr "Создать кинозал"
+
+#: admin_cms/templates/admin_cms/cinema_form.html:186
+#: admin_cms/templates/admin_cms/event_form.html:173
+#: admin_cms/templates/admin_cms/hall_form.html:122
+#: admin_cms/templates/admin_cms/main_page_change_form.html:127
+#: admin_cms/templates/admin_cms/movie_form.html:184
+#: admin_cms/templates/admin_cms/news_form.html:173
+#: admin_cms/templates/admin_cms/page_form.html:157
+msgid "Створити"
+msgstr "Создать"
+
+#: admin_cms/templates/admin_cms/events.html:5
+#: admin_cms/templates/admin_cms/news.html:5
+msgid "Список подій"
+msgstr "Список событий"
+
+#: admin_cms/templates/admin_cms/events.html:6
+msgid "Створити подію"
+msgstr "Создать событие"
+
+#: admin_cms/templates/admin_cms/events.html:15
+#: admin_cms/templates/admin_cms/news.html:15
+#: admin_cms/templates/admin_cms/pages.html:15
+msgid "Назва"
+msgstr "Название"
+
+#: admin_cms/templates/admin_cms/events.html:21
+#: admin_cms/templates/admin_cms/news.html:21
+#: admin_cms/templates/admin_cms/pages.html:21
+msgid "Статус"
+msgstr "Статус"
+
+#: admin_cms/templates/admin_cms/events.html:34
+#: admin_cms/templates/admin_cms/news.html:34
+#: admin_cms/templates/admin_cms/pages.html:34
+#: admin_cms/templates/admin_cms/pages.html:55
+#: admin_cms/templates/admin_cms/pages.html:75
+#: admin_cms/templates/admin_cms/pages.html:95
+#: admin_cms/templates/admin_cms/pages.html:115
+#: admin_cms/templates/admin_cms/pages.html:135
+#: admin_cms/templates/admin_cms/pages.html:156
+#: admin_cms/templates/admin_cms/pages.html:180
+msgid "ВВІМК"
+msgstr "ВКЛ"
+
+#: admin_cms/templates/admin_cms/events.html:36
+#: admin_cms/templates/admin_cms/news.html:36
+#: admin_cms/templates/admin_cms/pages.html:36
+#: admin_cms/templates/admin_cms/pages.html:57
+#: admin_cms/templates/admin_cms/pages.html:77
+#: admin_cms/templates/admin_cms/pages.html:97
+#: admin_cms/templates/admin_cms/pages.html:117
+#: admin_cms/templates/admin_cms/pages.html:137
+#: admin_cms/templates/admin_cms/pages.html:158
+msgid "ВИМК"
+msgstr "ОТК"
+
+#: admin_cms/templates/admin_cms/events.html:53
+#, fuzzy
+#| msgid "Видалити"
+msgid "Видалити подію"
+msgstr "Удалить"
+
+#: admin_cms/templates/admin_cms/events.html:59
+msgid "Ви впевнені, що хочете видалити подію "
+msgstr "Вы уверены, что хотите удалить событие "
+
+#: admin_cms/templates/admin_cms/mailing.html:12
+msgid "Вибрати, кому вислати:"
+msgstr "Выбрать, кому выслать:"
+
+#: admin_cms/templates/admin_cms/mailing.html:20
+msgid "Вибрати користувачів"
+msgstr "Выбрать пользователей"
+
+#: admin_cms/templates/admin_cms/mailing.html:27
+msgid "Виберіть файл:"
+msgstr "Выберите файл:"
+
+#: admin_cms/templates/admin_cms/mailing.html:29
+msgid "Завантажити"
+msgstr "Загрузить"
+
+#: admin_cms/templates/admin_cms/mailing.html:35
+msgid "Вибраний файл:"
+msgstr "Загрузить"
+
+#: admin_cms/templates/admin_cms/mailing.html:36
+msgid "Файлу не вибрано"
+msgstr "Файл не выбран"
+
+#: admin_cms/templates/admin_cms/mailing.html:40
+msgid "Кількість вибраних користувачів:"
+msgstr "Количество избранных пользователей:"
+
+#: admin_cms/templates/admin_cms/mailing.html:46
+#: admin_cms/templates/admin_cms/mailing.html:148
+msgid "Файли"
+msgstr "Файлы"
+
+#: admin_cms/templates/admin_cms/mailing.html:63
+msgid "Вибір користувачів"
+msgstr "Выбор пользователей"
+
+#: admin_cms/templates/admin_cms/mailing.html:71
+#: admin_cms/templates/admin_cms/users.html:18
+msgid "ПІБ"
+msgstr "ФИО"
+
+#: admin_cms/templates/admin_cms/mailing.html:72
+#: admin_cms/templates/admin_cms/users.html:19
+msgid "Псевдонім"
+msgstr "Псевдоним"
+
+#: admin_cms/templates/admin_cms/mailing.html:73
+msgid "Дата народження"
+msgstr "Дата рождения"
+
+#: admin_cms/templates/admin_cms/mailing.html:74
+#: admin_cms/templates/admin_cms/users.html:20
+msgid "Місто"
+msgstr "Город"
+
+#: admin_cms/templates/admin_cms/mailing.html:93
+msgid "Закрити"
+msgstr "Закрыть"
+
+#: admin_cms/templates/admin_cms/mailing.html:94
+msgid "Вибрати"
+msgstr "Выбрать"
+
+#: admin_cms/templates/admin_cms/mailing.html:101
+msgid "Почати розсилку"
+msgstr "Начать рассылку"
+
+#: admin_cms/templates/admin_cms/movie_change_form.html:116
+#: admin_cms/templates/admin_cms/movie_form.html:101
+msgid "Тип кіно"
+msgstr "Тип кино"
+
+#: admin_cms/templates/admin_cms/movies.html:6
+msgid "Список фільмів"
+msgstr "Список фильмов"
+
+#: admin_cms/templates/admin_cms/movies.html:8
+msgid "Створити фільм"
+msgstr "Создать фильм"
+
+#: admin_cms/templates/admin_cms/movies.html:15
+msgid "Поки що не існує жодного фільму, але ви можете виправити це"
+msgstr "Пока не существует ни одного фильма, но вы можете исправить это"
+
+#: admin_cms/templates/admin_cms/news.html:6
+#, fuzzy
+#| msgid "Створити кінозал"
+msgid "Створити новину"
+msgstr "Создать кинозал"
+
+#: admin_cms/templates/admin_cms/news.html:53
+#, fuzzy
+#| msgid "Створити кінозал"
+msgid "Видалити новину"
+msgstr "Создать кинозал"
+
+#: admin_cms/templates/admin_cms/news.html:59
+msgid "Ви впевнені, що хочете видалити новину "
+msgstr "Вы уверены, что хотите удалить новость "
+
+#: admin_cms/templates/admin_cms/pages.html:5
+msgid "Список сторінок"
+msgstr "Список страниц"
+
+#: admin_cms/templates/admin_cms/pages.html:6
+msgid "Створити сторінку"
+msgstr "Создать страницу"
+
+#: admin_cms/templates/admin_cms/pages.html:26
+msgid "Головна сторінка"
+msgstr "Главная страница"
+
+#: admin_cms/templates/admin_cms/pages.html:48
+#: cinema/templates/cinema/home.html:113 cinema/templates/cinema/home.html:216
+msgid "Про кінотеатр"
+msgstr "О кинотеатре"
+
+#: admin_cms/templates/admin_cms/pages.html:68
+#: cinema/templates/cinema/home.html:219
+msgid "Кафе-бар"
+msgstr "Кафе-бар"
+
+#: admin_cms/templates/admin_cms/pages.html:88
+msgid "Vip-зал"
+msgstr "Vip-зал"
+
+#: admin_cms/templates/admin_cms/pages.html:108
+#: cinema/templates/cinema/home.html:117 cinema/templates/cinema/home.html:218
+#: page/views.py:39
+msgid "Реклама"
+msgstr "Реклама"
+
+#: admin_cms/templates/admin_cms/pages.html:128
+#: cinema/templates/cinema/home.html:120 page/views.py:52
+msgid "Дитяча кімната"
+msgstr "Детская комната"
+
+#: admin_cms/templates/admin_cms/pages.html:174
+#: cinema/templates/cinema/home.html:122 cinema/templates/cinema/home.html:220
+#: page/templates/page/contacts_view.html:7
+msgid "Контакти"
+msgstr "Контакты"
+
+#: admin_cms/templates/admin_cms/pages.html:177
+msgid "Створення контактів"
+msgstr "Создание контактов"
+
+#: admin_cms/templates/admin_cms/users.html:14
+msgid "Дата реєстрації"
+msgstr "Дата регистрации"
+
+#: admin_cms/templates/admin_cms/users.html:15
+msgid "День народження"
+msgstr "День рожденья"
+
+#: admin_cms/templates/admin_cms/users.html:17
+msgid "Телефон"
+msgstr "Телефон"
+
+#: admin_cms/templates/admin_cms/users.html:49
+#, fuzzy
+#| msgid "Вибрати користувачів"
+msgid "Видалення користувача"
+msgstr "Выбрать пользователей"
+
+#: admin_cms/templates/admin_cms/users.html:55
+msgid "Ви впевнені, що хочете видалити "
+msgstr "Вы уверены, что хотите удалить "
+
+#: cinema/templates/cinema/cinema_detail.html:8
+#, fuzzy
+#| msgid "Список залів"
+msgid "Кількість залів"
+msgstr "Количество залов"
+
+#: cinema/templates/cinema/cinema_detail.html:14
+#: cinema/templates/cinema/hall_detail.html:8
+#: cinema/templates/cinema/home.html:177
+msgid "Дивіться цього місяця"
+msgstr "Смотрите в этом месяце"
+
+#: cinema/templates/cinema/cinema_detail.html:22
+#: cinema/templates/cinema/hall_detail.html:14
+#, fuzzy
+#| msgid "Розклад сеансів кінотеатра:"
+msgid "Розклад усіх сеансів"
+msgstr "Расписание сеансов кинотеатра:"
+
+#: cinema/templates/cinema/cinema_detail.html:34
+#: cinema/templates/cinema/home.html:100 cinema/templates/cinema/home.html:210
+msgid "Розклад"
+msgstr "Расписание"
+
+#: cinema/templates/cinema/cinema_detail.html:46
+msgid "Умови"
+msgstr "Условия"
+
+#: cinema/templates/cinema/home.html:53
+msgid "Логін"
+msgstr "Логин"
+
+#: cinema/templates/cinema/home.html:54
+msgid "Зареєструватися"
+msgstr "Зарегистрироваться"
+
+#: cinema/templates/cinema/home.html:97 cinema/templates/cinema/home.html:209
+msgid "Афіша"
+msgstr "Афиша"
+
+#: cinema/templates/cinema/home.html:103 cinema/templates/cinema/home.html:211
+msgid "Незабаром"
+msgstr "Скоро"
+
+#: cinema/templates/cinema/home.html:118
+msgid "Кафе"
+msgstr "Кафе"
+
+#: cinema/templates/cinema/home.html:121 cinema/templates/cinema/home.html:201
+#: page/templates/page/mobile_application_view.html:7
+msgid "Мобільні додатки"
+msgstr "Мобильные приложения"
+
+#: cinema/templates/cinema/home.html:127
+msgid "Адмін панель"
+msgstr "Админ панель"
+
+#: cinema/templates/cinema/home.html:184
+#: movie/templates/movie/movie_detail.html:53
+msgid "Купити квиток"
+msgstr "Купить билет"
+
+#: cinema/templates/cinema/home.html:205
+msgid "Розробка сайтів: AVADA-MEDIA"
+msgstr "Создание сайтов: AVADA-MEDIA"
+
+#: event/templates/event/event_view.html:6
+msgid "Акції та скидки"
+msgstr "Акции и скидки"
+
+#: kinocms/settings.py:146
+msgid "Ukraine"
+msgstr "Ukraine"
+
+#: kinocms/settings.py:147
+msgid "Russian"
+msgstr "Russian"
+
+#: movie/templates/movie/book_ticket.html:21
+msgid "Авторизуйтеся, для того, щоб забронювати собі місця на фільм"
+msgstr "Авторизируйтесь для того, чтобы забронировать себе места на фильм"
+
+#: movie/templates/movie/book_ticket.html:32
+msgid "Ціна в грн:"
+msgstr "Цена в грн:"
+
+#: movie/templates/movie/book_ticket.html:34
+msgid "Заброньовано:"
+msgstr "Забронировано:"
+
+#: movie/templates/movie/book_ticket.html:36
+msgid "Квитків:"
+msgstr "Билетов:"
+
+#: movie/templates/movie/book_ticket.html:38
+msgid "Сума:"
+msgstr "Сумма:"
+
+#: movie/templates/movie/book_ticket.html:57
+#: movie/templates/movie/schedule.html:69
+msgid "Бронювати"
+msgstr "Бронировать"
+
+#: movie/templates/movie/book_ticket.html:60
+msgid "Купити"
+msgstr "Купить"
+
+#: movie/templates/movie/movie_detail.html:10
+msgid "Розклад сеансів кінотеатра:"
+msgstr "Расписание сеансов кинотеатра:"
+
+#: movie/templates/movie/movie_detail.html:71
+msgid "Кадри та постери"
+msgstr "Кадры и постеры"
+
+#: movie/templates/movie/schedule.html:9
+msgid "Показувати тільки:"
+msgstr "Показывать только:"
+
+#: movie/templates/movie/schedule.html:22
+msgid "Кінотеатр"
+msgstr "Кинотеатр"
+
+#: movie/templates/movie/schedule.html:30
+msgid "Дата"
+msgstr "Дата"
+
+#: movie/templates/movie/schedule.html:38
+msgid "Фільм: всі"
+msgstr "Фильм: все"
+
+#: movie/templates/movie/schedule.html:46
+msgid "Зали: всі"
+msgstr "Залы: все"
+
+#: movie/templates/movie/schedule.html:65
+msgid "Час"
+msgstr "Время"
+
+#: movie/templates/movie/schedule.html:66
+msgid "Фільм"
+msgstr "Фильм"
+
+#: movie/templates/movie/schedule.html:67
+msgid "Зал"
+msgstr "Зал"
+
+#: movie/templates/movie/schedule.html:68
+msgid "Ціна"
+msgstr "Цена"
+
+#: user/forms.py:50 user/forms.py:86
+msgid "Паролі повинні співпадати!. Перевірте правильність написання!"
+msgstr "Пароли должны совпадать! Проверьте написание!"
+
+#: user/forms.py:82
+msgid "Перевірте правильність даних"
+msgstr "Проверьте верность данных"
