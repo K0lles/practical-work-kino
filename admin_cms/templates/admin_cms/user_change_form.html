@@ -1,0 +1,214 @@
+{% extends 'admin_cms/base.html' %}
+{% load static i18n %}
+
+{% block scripts %}
+    <script>
+        $( function() {
+            $( "#id_birthday" ).datepicker({ dateFormat: 'dd.mm.yy', defaultDate: new Date(2000, 10, 30) }).val();
+        } );
+    </script>
+    <style>
+        li {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'user_update' pk=simple_user.instance.id %}">
+        {% csrf_token %}
+
+        <div class="form-group row"
+                    {% if simple_user.name.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <label class="col-sm-2 col-form-label" for="{{ simple_user.name.id_for_label }}">
+                {{ simple_user.name.label }}
+            </label>
+            <div class="col-sm-10">
+                {{ simple_user.name }}
+            </div>
+        </div>
+        {% for error in simple_user.name.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.surname.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <label class="col-sm-2 col-form-label" for="{{ simple_user.surname.id_for_label }}">
+                {{ simple_user.surname.label }}
+            </label>
+            <div class="col-sm-10">
+                {{ simple_user.surname }}
+            </div>
+        </div>
+        {% for error in simple_user.surname.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.alias.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <label class="col-sm-2 col-form-label" for="{{ simple_user.alias.id_for_label }}">
+                {{ simple_user.alias.label }}
+            </label>
+            <div class="col-sm-10">
+                {{ simple_user.alias }}
+            </div>
+        </div>
+        {% for error in simple_user.alias.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.email.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <label class="col-sm-2 col-form-label" for="{{ simple_user.email.id_for_label }}">
+                {{ simple_user.email.label }}
+            </label>
+            <div class="col-sm-10">
+                {{ simple_user.email }}
+            </div>
+        </div>
+        {% for error in simple_user.email.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.card_number.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <label class="col-sm-2 col-form-label" for="{{ simple_user.card_number.id_for_label }}">
+                {{ simple_user.card_number.label }}
+            </label>
+            <div class="col-sm-10">
+                {{ simple_user.card_number }}
+            </div>
+        </div>
+        {% for error in simple_user.card_number.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.language.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <div class="form-check form-check-inline">
+                {{ simple_user.language.0 }}
+            </div>
+            <div class="form-check form-check-inline">
+                {{ simple_user.language.1 }}
+            </div>
+        </div>
+        {% for error in simple_user.language.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.phone_number.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <label class="col-sm-2 col-form-label" for="{{ simple_user.phone_number.id_for_label }}">
+                {{ simple_user.phone_number.label }}
+            </label>
+            <div class="col-sm-10">
+                {{ simple_user.phone_number }}
+            </div>
+        </div>
+        {% for error in simple_user.phone_number.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.birthday.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <label class="col-sm-2 col-form-label" for="{{ simple_user.birthday.id_for_label }}">
+                {{ simple_user.birthday.label }}
+            </label>
+            <div class="col-sm-10">
+            <input class="form-control" type="text" id="{{ simple_user.birthday.auto_id }}"
+                   name="{{ simple_user.birthday.html_name }}"
+                   value="{{ simple_user.instance.birthday|date:'d.m.Y' }}" required>
+            {% if simple_user.birthday.errors %}
+                {% for error in simple_user.birthday.errors %}
+                    <p class="warning">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+        {% for error in simple_user.birthday.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.sex.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <div class="form-check form-check-inline">
+                {{ simple_user.sex.0 }}
+            </div>
+            <div class="form-check form-check-inline">
+                {{ simple_user.sex.1 }}
+            </div>
+        </div>
+        {% for error in simple_user.sex.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.city.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <label class="col-sm-2 col-form-label" for="{{ simple_user.city.id_for_label }}">
+                {{ simple_user.city.label }}
+            </label>
+            <div class="col-sm-10">
+                {{ simple_user.city }}
+            </div>
+        </div>
+        {% for error in simple_user.city.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.password.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <label class="col-sm-2 col-form-label" for="{{ simple_user.password.id_for_label }}">
+                {{ simple_user.password.label }}
+            </label>
+            <div class="col-sm-10">
+                {{ simple_user.password }}
+            </div>
+        </div>
+        {% for error in simple_user.password.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-group row"
+                    {% if simple_user.password1.errors %}
+                 style="border: 1px solid red; border-radius: 0.25em; padding: 3px;"
+                    {% endif %}>
+            <label class="col-sm-2 col-form-label" for="{{ simple_user.password_repeat.id_for_label }}">
+                Повторіть пароль
+            </label>
+            <div class="col-sm-10">
+                {% comment %}<input class="form-control" name="{{ simple_user.password1.html_name }}"
+                       id="{{ simple_user.password1.auto_id }}" placeholder="Повторіть новий пароль">{% endcomment %}
+                {{ simple_user.password_repeat }}
+            </div>
+        </div>
+        {% for error in simple_user.password1.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+
+        {{ simple_user.non_field_errors }}
+
+        <button type="submit" class="btn btn-primary btn-block">{% trans 'Зберегти' %}</button>
+    </form>
+{% endblock content %}
