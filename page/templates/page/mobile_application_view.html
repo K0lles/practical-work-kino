@@ -1,0 +1,27 @@
+{% extends 'cinema/home.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-lg-10">
+            <h3 class="text-center">{% trans 'Мобільні додатки' %}</h3>
+            <p style="margin-top: 3%;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Vestibulum
+                rhoncus est pellentesque elit ullamcorper dignissim. Vitae ultricies leo integer malesuada nunc vel.
+                Fusce ut
+                placerat orci nulla pellentesque dignissim enim. Augue lacus viverra vitae congue. Nulla facilisi morbi
+                tempus iaculis. Dui faucibus in ornare quam viverra orci. Tellus in hac habitasse platea dictumst
+                vestibulum rhoncus est pellentesque. Hendrerit dolor magna eget est. Viverra accumsan in nisl nisi
+                scelerisque. Non curabitur gravida arcu ac. In mollis nunc sed id semper risus in.
+            </p>
+            <img src="{% static 'page/logos/mobile-applications.png' %}" style="margin-top: 5%;">
+            <img src="{% static 'page/logos/play-google-icons-together.png' %}" style="margin-top: 4%;">
+        </div>
+        <div class="col-sm-12 col-md-2 col-lg-2">
+            <div class="row">
+                <img src="{% static 'movie/logos/advertisment.png' %}" width="175px;">
+            </div>
+        </div>
+    </div>
+{% endblock %}
