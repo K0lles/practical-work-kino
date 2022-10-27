@@ -1,0 +1,81 @@
+{% extends 'admin_cms/base.html' %}
+{% load static i18n %}
+
+{% block content-header %}
+    <h4 class="text-center">{% trans 'Користувачі' %}</h4>
+{% endblock content-header %}
+
+
+{% block content %}
+    <table id="table-users" class="table table-bordered">
+        <thead>
+            <tr>
+                <td><b>ID</b></td>
+                <td><b>{% trans 'Дата реєстрації' %}</b></td>
+                <td><b>{% trans 'День народження' %}</b></td>
+                <td><b>E-mail</b></td>
+                <td><b>{% trans 'Телефон' %}</b></td>
+                <td><b>{% trans 'ПІБ' %}</b></td>
+                <td><b>{% trans 'Псевдонім' %}</b></td>
+                <td><b>{% trans 'Місто' %}</b></td>
+                <td style="border: none;"></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.date_joined|date:'d.m.Y' }}</td>
+                    <td>{{ user.birthday|date:'d.m.Y' }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone_number }}</td>
+                    <td>{{ user.name }} {{ user.surname }}</td>
+                    <td>{{ user.alias }}</td>
+                    <td>{{ user.city }}</td>
+                    <td style="border: none;">
+                        <a href="{% url 'user_update' pk=user.id %}" style="text-decoration: none;">
+                            <img src="{% static 'admin_cms/logos/pencil.png' %}" style="width: 25px; height: 25px;">
+                        </a>
+
+                        <a href="#" style="text-decoration: none;" data-toggle="modal" data-target="#deleteUserModal{{ user.id }}">
+                            <img src="{% static 'admin_cms/logos/cancel-button.png' %}" style="width: 25px; height: 25px;">
+                        </a>
+                    </td>
+                </tr>
+                <div class="modal fade" id="deleteUserModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{% trans 'Видалення користувача' %}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        {% trans 'Ви впевнені, що хочете видалити ' %} {{ user.name }} {{ user.surname }}?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Скасувати' %}</button>
+                        <a class="btn btn btn-danger" href="{% url 'user_delete' pk=user.id %}">{% trans 'Видалити' %}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}
+
+{% block scripts %}
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#table-users').DataTable({
+                pageLength: 5,
+                lengthMenu: [1, 5, 10],
+            });
+        } );
+    </script>
+{% endblock %}

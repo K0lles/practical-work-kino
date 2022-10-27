@@ -1,0 +1,15 @@
+{% extends 'cinema/home.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="flex-column justify-content-around">
+        {% for cinema in cinemas %}
+        <div style="display: inline-block; margin: 2% 0 0 2%">
+            <a href="{% url 'cinema_detail' cinema_pk=cinema.id %}" style="text-decoration: none; color: black">
+                <img src="{{ cinema.logo.url }}" width="340px" height="255px">
+                <h4 class="text-center">{{ cinema.name }}</h4>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'cinema/home.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-lg-10">
+            <h3 class="text-center">{% trans 'Контакти' %}</h3>
+            {% for contact in contacts %}
+            <div class="row" style="margin-top: 4%;">
+                <div class="col-sm-12 col-md-5 col-lg-5">
+                    <h3>{{ contact.cinema_name }}</h3>
+                    <img src="{{ contact.logo.url }}" height="250px" width="300px">
+                </div>
+                <div class="col-sm-12 col-md-7 col-lg-7">
+                    <p>{{ contact.address }}</p>
+                    <iframe src="{{ contact.coordinates }}" width="480" height="330" style="border:0;" allowfullscreen=""></iframe>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-sm-12 col-md-2 col-lg-2">
+            <div class="row">
+                <img src="{% static 'movie/logos/advertisment.png' %}" width="175px;">
+            </div>
+        </div>
+    </div>
+{% endblock %}
