@@ -15,7 +15,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-DEBUG = False
+DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-ibq!(dr%)s#d_17vnl2@yye)y=q!_7%05@llxf%my2!ldbbd+f')
@@ -66,7 +66,7 @@ INTERNAL_IPS = [
     # ...
 ]
 
-ROOT_URLCONF = 'kinocms.urls'
+ROOT_URLCONF = 'practical-work-kino.urls'
 
 TEMPLATES = [
     {

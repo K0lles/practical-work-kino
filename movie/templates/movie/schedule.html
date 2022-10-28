@@ -1,0 +1,156 @@
+{% extends 'cinema/home.html' %}
+{% load static i18n %}
+
+{% block content %}
+
+    <div class="row" style="margin-top: 3%;">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <label class="col-2">{% trans 'Показувати тільки:' %} </label>
+                <div onchange="" class="col-10 align-items-center" >
+                    <div class="row">
+                        <div class="col-2">
+                            <label class="" for="2D"><strong>2D</strong>
+                                <input class="types-checkbox" id="2D" type="checkbox" value="2D" checked>
+                            </label>
+                            <label class="" for="3D"><strong>3D</strong>
+                                <input class="types-checkbox" id="3D" type="checkbox" value="3D" checked>
+                            </label>
+                        </div>
+                        <div class="col-2">
+                            <select id="cinema-select" class="form-select" aria-label="Default select example">
+                                <option class="cinema-select" value="" selected>{% trans 'Кінотеатр' %}</option>
+                                {% for cinema in cinema %}
+                                <option class="cinema-select" value="{{ cinema.name }}">{{ cinema.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-2" style="margin-left: 5%;">
+                            <select id="date-select" class="form-select" aria-label="Default select example">
+                                <option class="date-select" value="" selected>{% trans 'Дата' %}</option>
+                                {% for date in dates %}
+                                <option class="date-select" value="{{ date|date:'d m Y' }}">{{ date|date:'d.m.Y' }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-2" style="margin-left: 1%;">
+                            <select id="movie-select" class="form-select" aria-label="Default select example">
+                                <option class="movie-select" value="" selected>{% trans 'Фільм: всі' %}</option>
+                                {% for movie in movies %}
+                                <option class="movie-select" value="{{ movie.name }}">{{ movie.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-2" style="margin-left: 5%;">
+                            <select id="hall-select" class="form-select" aria-label="Default select example">
+                                <option class="hall-select" value="" selected>{% trans 'Зали: всі' %}</option>
+                                {% for hall in halls %}
+                                <option class="hall-select" value="{{ hall.number }}">{{ hall.number }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%;">
+        <div id="schedule" class="col-8">
+            {% for date in dates %}
+            <div class="row" style="margin-top: 4%;">
+                <h5>{{ date.date|date:"j" }} {{ date.date|date:"E" }}, {{ date.date|date:'l' }}</h5>
+                <table class="col-12 table-bordered" style="border: solid orange 2px;">
+                    <thead class="text-center">
+                        <td>{% trans 'Час' %}</td>
+                        <td>{% trans 'Фільм' %}</td>
+                        <td>{% trans 'Зал' %}</td>
+                        <td>{% trans 'Ціна' %}</td>
+                        <td style="color: firebrick">{% trans 'Бронювати' %}</td>
+                    </thead>
+                    <tbody>
+                        {% for session in sessions %}
+                            {% if session.date.date == date.date %}
+                                <tr class="text-center">
+                                    <td>{{ session.date|date:'G:i' }}</td>
+                                    <td class="text-left">{{ session.movie.name }}</td>
+                                    <td>{{ session.hall.number }}</td>
+                                    <td>{{ session.price|floatformat }}</td>
+                                    <td class="justify-content-center">
+                                        <a href="{% url 'booking' session_pk=session.id %}" style="text-decoration: none">
+                                            <img src="{% static 'movie/logos/ticket.png' %}" height="15px" width="15px">
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-4" style="margin-top: 4%;">
+            <img src="{% static 'movie/logos/advertisment.png' %}" width="100%" height="100%">
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    let typesArray = ["2D", "3D",];
+    let cinema = '';
+    let date = [];
+    let movie = '';
+    let hall = '';
+
+    function callAjax() {
+    $.ajax({
+        type: 'GET',
+        url: '',
+        data: {
+            'types': typesArray,
+            'cinema': cinema,
+            'date': date,
+            'movie': movie,
+            'hall': hall
+        },
+        success: function(data) {
+            scheduleParse(data);
+        }
+    })
+}
+    $(`input.types-checkbox`).on('click', function () {
+        if (this.checked) {
+                typesArray.push(this.value)
+        }
+        else {
+            typesArray = typesArray.filter(e => e !== this.value);
+        }
+        callAjax();
+    })
+
+    $('#cinema-select').change(function () {
+        cinema = this.value;
+        callAjax();
+    })
+
+    $('#date-select').change(function () {
+        date = (this.value).split(" ");
+        callAjax();
+
+    })
+
+    $('#movie-select').change(function () {
+        movie = this.value;
+        callAjax();
+    })
+
+    $('#hall-select').change(function () {
+        hall = this.value;
+        callAjax();
+    })
+
+</script>
+{% endblock %}

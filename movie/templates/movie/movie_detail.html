@@ -1,0 +1,148 @@
+{% extends 'cinema/home.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="row">
+        <iframe class="col-lg-12 col-md-12 col-sm-12" src="{{ movie.trailer_url }}" allow="fullscreen;" height="555px">
+        </iframe>
+    </div>
+    <div class="row" style="margin-top: 5%;">
+        <h4 class="col-8"><strong>{% trans 'Розклад сеансів кінотеатра:' %} </strong></h4>
+        <div class="col-1">
+            <button class="btn btn-outline-success type-selector" type="button" value="2D">2D</button>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-outline-success type-selector" type="button" value="3D">3D</button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-outline-success type-selector" type="button" value="all">Все</button>
+        </div>
+    </div>
+    <div class="row justify-content-around" id="tables-session" style="padding: 3% 5% 0 5%">
+        {% for session in sessions %}
+            <table class="table-bordered" style="margin-right: 5%; border: solid black 2px;">
+                <tr style="border: solid black 2px">
+                    <td class="text-center"><h4><strong>{{ session.date|date:'j D' }}</strong></h4></td>
+                </tr>
+                <tr style="border: solid black 2px">
+                    <td><h4>{{ session.date|date:'F' }}</h4></td>
+                </tr>
+            </table>
+        {% endfor %}
+    </div>
+    <div class="row justify-content-around" id="detail-tables" style="margin-top: 5%;">
+        {% for session in sessions %}
+            <table class="table-bordered" style="margin-right: 5%; border: solid black 2px">
+                <tr style="border: solid black 2px">
+                    <td style="border: solid black 2px"><strong>{{ session.date|date:'G:i' }}</strong></td>
+                    <td style="border: solid black 2px">{{ session.type }}</td>
+                </tr>
+                <tr style="border: solid black 2px">
+                    <td style="border: solid black 2px">Зал {{ session.hall.number }}</td>
+                    <td style="border: solid black 2px">{{ session.price|floatformat }}</td>
+                </tr>
+            </table>
+        {% endfor %}
+    </div>
+    <div class="row" style="padding-top: 5%;">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <img src="{{ movie.main_photo.url }}" width="450px" height="450px">
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="row justify-content-center" style="padding: 3% 0 3% 0;">
+                <a href="{% url 'booking' session_pk=movie.session_set.first.id %}" class="btn btn-outline-success align-content-center">{% trans 'Купити квиток' %}</a>
+            </div>
+            <div class="row justify-content-center">
+                <h4 class="text-center">{{ movie.name }}</h4>
+            </div>
+            <div class="row justify-content-center">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6"></div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="row justify-content-center"><h4 class="text-center">{% trans 'Кадри та постери' %}</h4></div>
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div id="carouselExampleControls" class="carousel slide justify-content-center" data-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for photo in movie.gallery.photo_set.all %}
+                            <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}" data-interval="5000">
+                                <img src="{{ photo.photo.url }}" class="d-block w-100" alt="photo">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+
+        $('.type-selector').click(function (event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: '/movie/{{ movie.pk }}',
+                data: {
+                    type: $(event.target).val()
+                },
+                success: function (data) {
+                    let tableSessions = $('#tables-session');
+                    let detailTables = $('#detail-tables');
+                    tableSessions.empty();
+                    detailTables.empty();
+                    let dateNumbers = ['Нед', 'Пон', 'Вівт', 'Сер', 'Четв', 'П`ятн', 'Суб']
+                    let dateMonths = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень']
+                    for (let i = 0; i < (data['sessions']).length; i++) {
+                        let date = parseISOLocal(data['sessions'][i]['fields']['date']);
+                        let contentSessionTables = `<table class="table-bordered" style="margin-right: 5%; border: solid black 2px;">
+                                        <tr style="border: solid black 2px">
+                                            <td class="text-center">
+                                                <h4><strong>${date.getDate()} ${dateNumbers[date.getDay()]}</strong></h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">
+                                                <h4>${dateMonths[date.getMonth()]}</h4>
+                                            </td>
+                                        </tr style="border: solid black 2px">
+                                    </table>`
+
+                        let contentDetailTables =  `<table class="table-bordered" style="margin-right: 5%; border: solid black 2px">
+                                                        <tr style="border: solid black 2px">
+                                                            <td style="border: solid black 2px"><strong>${date.getHours()+3}:${date.getMinutes()}</strong></td>
+                                                            <td style="border: solid black 2px">${data['sessions'][i]['fields']['type']}</td>
+                                                        </tr>
+                                                        <tr style="border: solid black 2px">
+                                                            <td style="border: solid black 2px">Зал ${data['halls'][i]['fields']['number']}</td>
+                                                            <td style="border: solid black 2px">${data['sessions'][i]['fields']['price']}</td>
+                                                        </tr>
+                                                    </table>`
+                        tableSessions.append(contentSessionTables);
+                        detailTables.append(contentDetailTables);
+                    }
+                }
+            })
+        })
+    </script>
+{% endblock %}
